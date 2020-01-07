@@ -15,9 +15,18 @@ find_package(catkin REQUIRED
     rviz
 )
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+find_package(Qt5Widgets CONFIG REQUIRED)
+find_package(Qt5Core)
+find_package(Qt5Gui CONFIG REQUIRED)
 
-include(${QT_USE_FILE})
+find_package(Eigen3 REQUIRED)
+
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+include_directories(${Qt5Gui_INCLUDE_DIRS})
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
 set(rviz_tf_marker_SRCS
   src/tf_marker.cpp
@@ -56,7 +65,7 @@ catkin_package(
     rviz
 )
 
-qt4_wrap_cpp(rviz_tf_marker_MOCS ${rviz_tf_marker_HDRS})
+qt5_wrap_cpp(rviz_tf_marker_MOCS ${rviz_tf_marker_HDRS})
 
 include_directories(
   ${rviz_tf_marker_INCLUDE_DIRECTORIES}
